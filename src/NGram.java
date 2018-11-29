@@ -8,13 +8,13 @@ public class NGram
 	
 	public NGram(String dbText)
 	{
-		text = dbText;
+		text = dbText.toLowerCase();
 		gramSets = new ArrayList<String>();
 	}
-	
+	//get possible number of NGrams in a search term
 	public int getNumNGrams(int n)
 	{
-		return (text.length() - n);
+		return (text.length() - n + 1);
 	}
 	
 	public int countNearMatch(String searchString, double percMatch)
@@ -31,14 +31,14 @@ public class NGram
 			}
 			if(length != 0 && count / length >= percMatch)
 			{
-				System.out.println(text.substring(i, i + searchString.length()));
+				//System.out.println(text.substring(i, i + searchString.length()));
 				gramCount++;
 			}
 		}
 		return gramCount;
 	}
 
-	public int countMismatch(String searchString, double percMismatch)
+	public int countMismatch(String searchString, double percMismatch) // NOT Case with % = 1.0
 	{
 		int length = searchString.length();
 		int gramCount = 0;
@@ -56,7 +56,7 @@ public class NGram
 		return gramCount;
 	}
 
-	public int countExactNGram(String searchString, int n)
+	public int countExactNGram(String searchString, int n) // AND with n = 1
 	{
 		gramSets.clear();
 		listGrams(searchString.split(" "), n);
@@ -72,7 +72,7 @@ public class NGram
 		return matches;
 	}
 	
-	public int countAnyNGram(String searchString, int n, double percMatch)
+	public int countAnyNGram(String searchString, int n, double percMatch) // OR with n = 1
 	{
 		gramSets.clear();
 		listGrams(searchString.split(" "), "", n);
@@ -87,7 +87,7 @@ public class NGram
 		
 		return matches;
 	}
-
+	//get pairs of triplets ie college of (1) of engineering (2) engineering school (3)
 	private void listGrams(String set[], int n)
 	{
 		for(int i = 0; i < set.length - n + 1; i++)
@@ -98,7 +98,7 @@ public class NGram
 			gramSets.add(gram);
 		}
 	}
-	
+	//To list every possible combination with N number of grams
 	private void listGrams(String set[], String thisGram, int n)
 	{
 		if(n == 0)
@@ -109,15 +109,18 @@ public class NGram
 				listGrams(set, thisGram + " " + set[i], n - 1);
 		}
 	}
-	
+	//when does not find anything (can delete later used for testing)
 	public static void main(String args[]) throws FileNotFoundException
 	{
+		//
 		Scanner input = new Scanner(new File("test.txt"));
 		String text = "";
 		while(input.hasNextLine())
 			text += input.nextLine();
 		input.close();
-		
+
+		//Ranks the one that comes out the most match for whatever you are looking for
+		//The green text is what is being entered in the searchkey
 		NGram ranker = new NGram(text);
 		System.out.println(ranker.countAnyNGram("at", 1, 0.5));
 		System.out.println(ranker.countAnyNGram("at all", 2, 0.6));
@@ -127,6 +130,7 @@ public class NGram
 		System.out.println(ranker.countNearMatch("cordial", 1.0));
 		System.out.println(ranker.countNearMatch("cardial", 0.85));
 		System.out.println(ranker.countNearMatch("cord al", 0.85));
+		System.out.println(ranker.countMismatch("zzxyz", 0.85));
 		
 	}
 }
