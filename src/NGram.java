@@ -60,6 +60,7 @@ public class NGram
 	{
 		gramSets.clear();
 		listGrams(searchString.split(" "), n);
+		System.out.println(gramSets.toArray());
 		Iterator<String> iter = gramSets.iterator();
 		
 		int matches = 0;

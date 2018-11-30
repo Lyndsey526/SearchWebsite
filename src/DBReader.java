@@ -29,12 +29,69 @@ public class DBReader
         }
     }
 
-    public void query(String key) throws SQLException
+    public void query(String key, String flag) throws SQLException
+    {
+        String sql = "SELECT w.LinkID, w.SiteName, w.URL, s.SourceCode " +
+                "FROM Websites w, SourceCodes s " +
+                "WHERE s.LinkID = w.LinkID AND s.SourceCode LIKE ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        //stmt.setString(1, flag);
+        stmt.setString(1, key);
+        ResultSet rs = stmt.executeQuery();
+
+        int i = 0;
+        while(rs.next())
+        {
+            Integer lid = rs.getInt("LinkID");
+            String sname = rs.getString("SiteName");
+            String url = rs.getString("URL");
+            String scode = rs.getString("SourceCode");
+            int len = scode.length();
+            scode = (len <= 600 ? scode.substring(0, len) : scode.substring(0, 600));
+            scode = scode.replaceAll("(?i)" + key.substring(1, key.length()-1), "<b>" + key.substring(1, key.length()-1).toUpperCase() + "</b>");
+
+            if(i == 0)
+                System.out.println(scode);
+            i++;
+            sites.add(new Sites(lid, sname, url, scode));
+        }
+    }
+
+    public void queryTitle(String key, String flag) throws SQLException
+    {
+        String sql = "SELECT w.LinkID, w.SiteName, w.URL, s.SourceCode " +
+                "FROM Websites w, SourceCodes s " +
+                "WHERE s.LinkID = w.LinkID AND w.SiteName LIKE ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        //stmt.setString(1, flag);
+        stmt.setString(1, key);
+        ResultSet rs = stmt.executeQuery();
+
+        int i = 0;
+        while(rs.next())
+        {
+            Integer lid = rs.getInt("LinkID");
+            String sname = rs.getString("SiteName");
+            String url = rs.getString("URL");
+            String scode = rs.getString("SourceCode");
+            int len = scode.length();
+            scode = (len <= 600 ? scode.substring(0, len) : scode.substring(0, 600));
+            scode = scode.replaceAll("(?i)" + key.substring(1, key.length()-1), "<b>" + key.substring(1, key.length()-1).toUpperCase() + "</b>");
+
+            if(i == 0)
+                System.out.println(scode);
+            i++;
+            sites.add(new Sites(lid, sname, url, scode));
+        }
+    }
+
+    public void queryHTTP(String key, String flag) throws SQLException
     {
         String sql = "SELECT w.LinkID, w.SiteName, w.URL, s.SourceCode " +
                      "FROM Websites w, SourceCodes s " +
-                     "WHERE s.LinkID = w.LinkID AND s.SourceCode LIKE ?";
+                     "WHERE s.LinkID = w.LinkID AND w.URL LIKE ?";
         PreparedStatement stmt = conn.prepareStatement(sql);
+        //stmt.setString(1, flag);
         stmt.setString(1, key);
         ResultSet rs = stmt.executeQuery();
 
@@ -64,7 +121,7 @@ public class DBReader
     public static void main(String args[])
     {
         try {
-            (new DBReader()).query("%engineering%");
+            (new DBReader()).query("%engineering%", "");
         }
         catch (Exception e) {
             e.printStackTrace();

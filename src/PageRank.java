@@ -1,4 +1,7 @@
-public class PageRank 
+/*
+		https://en.wikipedia.org/wiki/PageRank
+*/
+public class PageRank
 {
 	private Matrix M = null;
 	
@@ -11,15 +14,15 @@ public class PageRank
 	public double[][] getRank(double damp_factor, double tol)
 	{
 		int N = M.size(2);
-		Matrix v = Matrix.rand(N, 1), last_v = Matrix.ones(N, 1).multiply(100);
-		v = v.unitVector();
-		Matrix M_hat = M.multiply(damp_factor).add(Matrix.ones(N, N).multiply((1 - damp_factor) / N));
-		while(v.subtract(last_v).magnitude() > tol)
+		Matrix vect = Matrix.createRandomMatrix(N, 1), last_v = Matrix.createOnesMatrix(N, 1).multiply(100);
+		vect = vect.unitVector();
+		Matrix M_hat = M.multiply(damp_factor).add(Matrix.createOnesMatrix(N, N).multiply((1 - damp_factor) / N));
+		while(vect.subtract(last_v).magnitude() > tol)
 		{
-			last_v = v;
-			v = M_hat.multiply(v);
+			last_v = vect;
+			vect = M_hat.multiply(vect);
 		}
-		return v.toVectorMatrix();
+		return vect.toVectorMatrix();
 	}
 	
 	private double[][] makeMMatrix(int counts[][])

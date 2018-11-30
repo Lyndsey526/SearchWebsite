@@ -125,7 +125,7 @@ public class Matrix
         return thisMat;
     }
 
-    public static Matrix ones(int rows, int cols)
+    public static Matrix createOnesMatrix(int rows, int cols)
     {
         Matrix newMat = new Matrix(rows, cols);
         for(int i = 0; i < rows; i++)
@@ -134,7 +134,7 @@ public class Matrix
         return newMat;
     }
 
-    public static Matrix rand(int rows, int cols)
+    public static Matrix createRandomMatrix(int rows, int cols)
     {
         Matrix newMat = new Matrix(rows, cols);
         for(int i = 0; i < rows; i++)
