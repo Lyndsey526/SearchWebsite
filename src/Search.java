@@ -45,7 +45,7 @@ public class Search extends HttpServlet
                 // if title flag is true do s.getsitename() else s.getsourcecode()
                 String text = s.getsourcecode();
                 NGram ranker = new NGram(text);
-                //line below is the line to chagne depedning on what type of match you are expecting to return.
+                //line below is the line to change depending on what type of match you are expecting to return.
                 int matches = ranker.countNearMatch(key, 0.50);
                 System.out.println("MATCHES: " + matches);
                 counts[i] = new KeyCounts(s, matches);
