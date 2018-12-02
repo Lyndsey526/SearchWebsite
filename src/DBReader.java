@@ -21,7 +21,7 @@ public class DBReader
     public DBReader()
     {
         try {
-            conn = openConnection();
+           // conn = openConnection();
             sites = new ArrayList<>();
         }
         catch (Exception e) {
@@ -29,8 +29,9 @@ public class DBReader
         }
     }
 
-    public void queryNot(String key, String notKey, String type) throws SQLException
-    {
+    public void queryNot(String key, String notKey, String type) throws Exception {
+        conn = openConnection();
+
         String sql = "SELECT w.LinkID, w.SiteName, w.URL, s.SourceCode " +
                 "FROM Websites w, SourceCodes s " +
                 "WHERE s.LinkID = w.LinkID AND (" + type + " LIKE ?) AND (NOT " + type + " LIKE ?)";
@@ -40,10 +41,12 @@ public class DBReader
         ResultSet rs = stmt.executeQuery();
 
         addSites(rs, 0, key);
+        closeDB();
     }
 
-    public void query(String key) throws SQLException
+    public void query(String key) throws Exception
     {
+        conn = openConnection();
         String sql = "SELECT w.LinkID, w.SiteName, w.URL, s.SourceCode " +
                 "FROM Websites w, SourceCodes s " +
                 "WHERE s.LinkID = w.LinkID AND s.SourceCode LIKE ?";
@@ -53,10 +56,12 @@ public class DBReader
         ResultSet rs = stmt.executeQuery();
 
         addSites(rs, 0 , key);
+        closeDB();
     }
 
-    public void queryTitle(String key) throws SQLException
+    public void queryTitle(String key) throws Exception
     {
+        conn = openConnection();
         String sql = "SELECT w.LinkID, w.SiteName, w.URL, s.SourceCode " +
                 "FROM Websites w, SourceCodes s " +
                 "WHERE s.LinkID = w.LinkID AND w.SiteName LIKE ?";
@@ -67,10 +72,12 @@ public class DBReader
 
         int i = 0;
         addSites(rs, i, key);
+        closeDB();
     }
 
-    public void queryHTTP(String key) throws SQLException
+    public void queryHTTP(String key) throws Exception
     {
+        conn = openConnection();
         String sql = "SELECT w.LinkID, w.SiteName, w.URL, s.SourceCode " +
                      "FROM Websites w, SourceCodes s " +
                      "WHERE s.LinkID = w.LinkID AND w.URL LIKE ?";
@@ -80,9 +87,11 @@ public class DBReader
 
         int i = 0;
         addSites(rs, i, key);
+        closeDB();
     }
 
-    public void addSites(ResultSet rs, int i, String key) throws SQLException{
+    public void addSites(ResultSet rs, int i, String key) throws Exception {
+        conn = openConnection();
         while(rs.next())
         {
             Integer lid = rs.getInt("LinkID");
@@ -99,12 +108,25 @@ public class DBReader
             i++;
             sites.add(new Sites(lid, sname, url, scode));
         }
+        closeDB();
     }
 
     public ArrayList<Sites> getAllResults()
     {
         return sites;
     }
+
+    public void closeDB(){
+        try{
+            if(conn!=null&&!conn.isClosed()){
+                conn.close();
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public static void main(String args[])
     {

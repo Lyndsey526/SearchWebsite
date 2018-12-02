@@ -81,8 +81,9 @@ public class VectorSpace
 			for(int i = 0; i < documentCounts.size(); i++)
 			{
 				TreeMap<String, Integer> doc = documentCounts.get(i);
-				if(doc.containsKey(terms[j]) && doc.get(terms[j]) > 0)
+				if(doc.containsKey(terms[j]) && doc.get(terms[j]) > 0) {
 					matches++;
+				}
 			}
 			if(matches != 0) {
 				logNN[j] = Math.log(N / matches);

@@ -25,8 +25,9 @@ public class Matrix
 
     public Matrix add(Matrix other)
     {
-        if(columns != other.columns || rows != other.rows)
+        if(columns != other.columns || rows != other.rows) {
             return null;
+        }
         else
         {
             Matrix sum = new Matrix(rows, columns);
