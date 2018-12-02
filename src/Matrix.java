@@ -39,8 +39,9 @@ public class Matrix
 
     public Matrix subtract(Matrix other)
     {
-        if(columns != other.columns || rows != other.rows)
+        if(columns != other.columns || rows != other.rows) {
             return null;
+        }
         else
         {
             Matrix diff = new Matrix(rows, columns);
@@ -62,8 +63,9 @@ public class Matrix
 
     public Matrix multiply(Matrix other)
     {
-        if(columns != other.rows)
+        if(columns != other.rows) {
             return null;
+        }
         else
         {
             Matrix product = new Matrix(rows, other.columns);
@@ -83,12 +85,15 @@ public class Matrix
 
     public int size(int dim)
     {
-        if(dim == 1)
+        if(dim == 1) {
             return rows;
-        else if(dim == 2)
+        }
+        else if(dim == 2) {
             return columns;
-        else
+        }
+        else {
             return -1;
+        }
     }
 
     public Matrix unitVector()
@@ -112,8 +117,9 @@ public class Matrix
                 sum += (mat[i][0] * mat[i][0]);
             return Math.sqrt(sum);
         }
-        else
+        else {
             return -1.0;
+        }
     }
 
     public double[][] toVectorMatrix()

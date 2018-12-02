@@ -39,21 +39,27 @@ public class Search extends HttpServlet
 			    String notFilterKey = filterKey.substring(filterKey.indexOf("NOT") + 3).trim();
 			    System.out.println("|" + thisFilterKey + "|" + notFilterKey + "|");
 
-				if(key.contains("title:"))
+				if(key.contains("title:")){
 				    reader.queryNot("%" + thisFilterKey + "%", "%" + notFilterKey + "%", "w.SiteName");
-				else if(key.contains("http:"))
+				}
+				else if(key.contains("http:")){
 				    reader.queryNot("%" + thisFilterKey + "%", "%" + notFilterKey + "%", "w.URL");
-				else
-				    reader.queryNot("%" + thisFilterKey + "%", "%" + notFilterKey + "%", "s.SourceCode");
+				}
+				else {
+                    reader.queryNot("%" + thisFilterKey + "%", "%" + notFilterKey + "%", "s.SourceCode");
+                }
 			    sites = reader.getAllResults();
 			}
 			else {
-                if (key.contains("title:"))
+                if (key.contains("title:")){
                     reader.queryTitle("%" + filterKey.replace(" ", "%") + "%");
-                else if (key.contains("http:"))
+                }
+                else if (key.contains("http:")){
                     reader.queryHTTP("%" + filterKey.replace(" ", "%") + "%");
-                else
+                }
+                else {
                     reader.query("%" + filterKey.replace(" ", "%") + "%");
+                }
 
                 sites = reader.getAllResults();
 
@@ -71,8 +77,9 @@ public class Search extends HttpServlet
                     } else if (key.contains("http:")) {
                         text = s.geturl();
                         key = key.replace("http:", "");
-                    } else
+                    } else {
                         text = s.getsourcecode();
+                    }
 
                     boolean andFlag = false, orFlag = false;
                     if (key.contains("AND")) {
@@ -89,14 +96,18 @@ public class Search extends HttpServlet
                     NGram ranker = new NGram(text);
                     //line below is the line to change depending on what type of match you are expecting to return.
                     int matches = 0;
-                    if (andFlag)
+                    if (andFlag){
                         matches = ranker.countExactNGram(key, 1);
-                    else if (orFlag)
+                    }
+                    else if (orFlag) {
                         matches = ranker.countAnyNGram(key, 1, 0.9);
-                    else if (notFlag)
+                    }
+                    else if (notFlag) {
                         matches = ranker.countExactNGram(key, 1);
-                    else
+                    }
+                    else {
                         matches = ranker.countNearMatch(key, 0.8);
+                    }
                     System.out.println("MATCHES: " + matches);
                     counts[i] = new KeyCounts(s, matches);
                 }
@@ -104,8 +115,9 @@ public class Search extends HttpServlet
                 Arrays.sort(counts, new KeyCountComparer());
                 sites.clear();
                 for (int i = 0; i < counts.length; i++) {
-                    if (!notFlag || counts[i].getCount() == 0)
+                    if (!notFlag || counts[i].getCount() == 0) {
                         sites.add(counts[i].getSite());
+                    }
                 }
             }
 			request.setAttribute("links_list", sites);

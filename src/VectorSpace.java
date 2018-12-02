@@ -38,15 +38,19 @@ public class VectorSpace
 			{
 				if(!textTerms[i].equals(""))
 				{
-					if(counts.containsKey(textTerms[i]))
+					if(counts.containsKey(textTerms[i])) {
 						counts.put(textTerms[i], counts.get(textTerms[i]) + 1);
-					else
+					}
+					else {
 						counts.put(textTerms[i], 1);
+					}
 						
-					if(totalCounts.containsKey(textTerms[i]))
+					if(totalCounts.containsKey(textTerms[i])) {
 						totalCounts.put(textTerms[i], totalCounts.get(textTerms[i]) + 1);
-					else
+					}
+					else {
 						totalCounts.put(textTerms[i], 1);
+					}
 				}
 			}
 			documentCounts.add(counts);
@@ -80,10 +84,12 @@ public class VectorSpace
 				if(doc.containsKey(terms[j]) && doc.get(terms[j]) > 0)
 					matches++;
 			}
-			if(matches != 0)
+			if(matches != 0) {
 				logNN[j] = Math.log(N / matches);
-			else
+			}
+			else {
 				logNN[j] = 0.0;
+			}
 		}
 		
 		for(int k = 0; k < documents.size(); k++)

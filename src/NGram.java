@@ -26,8 +26,9 @@ public class NGram
 			double count = 0;
 			for(int j = 0; j < length; j++)
 			{
-				if(text.charAt(i + j) == searchString.charAt(j))
+				if(text.charAt(i + j) == searchString.charAt(j)) {
 					count++;
+				}
 			}
 			if(length != 0 && count / length >= percMatch)
 			{
@@ -47,11 +48,13 @@ public class NGram
 			double count = 0;
 			for(int j = 0; j < length; j++)
 			{
-				if(text.charAt(i + j) != searchString.charAt(j))
+				if(text.charAt(i + j) != searchString.charAt(j)) {
 					count++;
+				}
 			}
-			if(length != 0 && count / length >= percMismatch)
+			if(length != 0 && count / length >= percMismatch) {
 				gramCount++;
+			}
 		}
 		return gramCount;
 	}
@@ -102,8 +105,9 @@ public class NGram
 	//To list every possible combination with N number of grams
 	private void listGrams(String set[], String thisGram, int n)
 	{
-		if(n == 0)
+		if(n == 0) {
 			gramSets.add(thisGram);
+		}
 		else
 		{
 			for(int i = 0; i < set.length; i++)
