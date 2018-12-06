@@ -138,3 +138,12 @@ public class DBReader
         }
     }
 }
+
+/*
+Output Code
+/Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home/bin/java "-javaagent:/Applications/IntelliJ IDEA.app/Contents/lib/idea_rt.jar=64093:/Applications/IntelliJ IDEA.app/Contents/bin" -Dfile.encoding=UTF-8 -classpath "/Users/turtle/Desktop/Search 2 - works/out/production/Search:/Users/turtle/Desktop/Search 2 - works/web/WEB-INF/lib/jstl-1.2.jar:/Users/turtle/Desktop/Search 2 - works/web/WEB-INF/lib/mysql-connector-java-8.0.13.jar" DBReader
+California Baptist University Apply Now| Visit Campus| Give Admissions Undergraduate Graduate International Online Academics Schools and Colleges College of Architecture, Visual Arts and Design College of Arts and Sciences College of Behavioral and Social Sciences College of <b>ENGINEERING</b> College of Health Science College of Nursing School of Business School of Christian Ministries School of Education School of Music Online and Professional Studies Programs Academic Calendar Academic Catalogs Library Faculty Student Services Academic Advising Admissions Athletics Career Services Commencement Com
+
+Process finished with exit code 0
+
+*/

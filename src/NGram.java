@@ -139,3 +139,21 @@ public class NGram
 		
 	}
 }
+/*
+Output Code
+/Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home/bin/java "-javaagent:/Applications/IntelliJ IDEA.app/Contents/lib/idea_rt.jar=64089:/Applications/IntelliJ IDEA.app/Contents/bin" -Dfile.encoding=UTF-8 -classpath "/Users/turtle/Desktop/Search 2 - works/out/production/Search:/Users/turtle/Desktop/Search 2 - works/web/WEB-INF/lib/jstl-1.2.jar:/Users/turtle/Desktop/Search 2 - works/web/WEB-INF/lib/mysql-connector-java-8.0.13.jar" NGram
+125
+19
+[Ljava.lang.Object;@28feb3fa
+17
+[Ljava.lang.Object;@675d3402
+0
+[Ljava.lang.Object;@51565ec2
+7
+2
+2
+2
+3861
+
+Process finished with exit code 0
+*/

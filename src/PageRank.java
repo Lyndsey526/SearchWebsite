@@ -64,3 +64,15 @@ public class PageRank
 		
 	}
 }
+/*
+Output Code
+/Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home/bin/java "-javaagent:/Applications/IntelliJ IDEA.app/Contents/lib/idea_rt.jar=64079:/Applications/IntelliJ IDEA.app/Contents/bin" -Dfile.encoding=UTF-8 -classpath "/Users/turtle/Desktop/Search 2 - works/out/production/Search:/Users/turtle/Desktop/Search 2 - works/web/WEB-INF/lib/jstl-1.2.jar:/Users/turtle/Desktop/Search 2 - works/web/WEB-INF/lib/mysql-connector-java-8.0.13.jar" PageRank
+0.4419260489883389
+0.24751715902638516
+0.24751715902638516
+0.3677713224113276
+0.463976919783892
+
+
+Process finished with exit code 0
+*/

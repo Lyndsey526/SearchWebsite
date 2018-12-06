@@ -145,3 +145,15 @@ public class VectorSpace
 			System.out.println(simScores[i]);
 	}
 }
+
+/*
+Output Code
+/Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home/bin/java "-javaagent:/Applications/IntelliJ IDEA.app/Contents/lib/idea_rt.jar=64103:/Applications/IntelliJ IDEA.app/Contents/bin" -Dfile.encoding=UTF-8 -classpath "/Users/turtle/Desktop/Search 2 - works/out/production/Search:/Users/turtle/Desktop/Search 2 - works/web/WEB-INF/lib/jstl-1.2.jar:/Users/turtle/Desktop/Search 2 - works/web/WEB-INF/lib/mysql-connector-java-8.0.13.jar" VectorSpace
+0.3162277660168379
+0.4778094670393762
+0.3162277660168379
+0.0
+
+Process finished with exit code 0
+
+*/
